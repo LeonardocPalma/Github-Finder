@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 
 import BackBtn from "../components/BackBtn";
 import Loader from "../components/Loader";
+import Repo from "../components/Repo";
 import { RepoProps } from "../types/repo";
 import classes from "./Repos.module.css";
 
@@ -30,14 +31,14 @@ const Repos = () => {
   if (!repos && isLoading) return <Loader />;
 
   return (
-    <div>
+    <div className={classes.repos}>
       <BackBtn />
       <h2>Explore os repositórios do usuário: {username}</h2>
       {repos && repos.length === 0 && <p>Usuário sem repositórios</p>}
       {repos && repos.length > 0 && (
-        <div>
+        <div className={classes.repos_container}>
           {repos.map((repo: RepoProps) => (
-            <p>{repo.name}</p>
+            <Repo key={repo.name} {...repo} />
           ))}
         </div>
       )}
